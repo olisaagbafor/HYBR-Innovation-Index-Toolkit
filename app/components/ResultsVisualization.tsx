@@ -17,10 +17,10 @@ const ResultsVisualization = ({ scores }: ResultsVisualizationProps) => {
         sum + Number(score), 0) / Object.values(scores).length;
 
     const getScoreCategory = (score: number) => {
-        if (score >= 4.5) return { text: 'Excellence', color: 'text-green-600' };
-        if (score >= 3.5) return { text: 'Strong', color: 'text-blue-600' };
-        if (score >= 2.5) return { text: 'Moderate', color: 'text-yellow-600' };
-        return { text: 'Needs Improvement', color: 'text-red-600' };
+        if (score >= 4.5) return { text: "Excellence", color: "text-green-600" };
+        if (score >= 3.5) return { text: "Strong", color: "text-blue-600" };
+        if (score >= 2.5) return { text: "Moderate", color: "text-yellow-600" };
+        return { text: "Needs Improvement", color: "text-red-600" };
     };
 
     useEffect(() => {
@@ -41,10 +41,9 @@ const ResultsVisualization = ({ scores }: ResultsVisualizationProps) => {
         chartInstance.current = new Chart(ctx, {
             type: 'radar',
             data: {
-                // Use the label property for visualization
                 labels: questions.map(q => q.label),
                 datasets: [{
-                    label: 'Innovation Score',
+                    label: "Innovation Score",
                     data,
                     backgroundColor: 'rgba(59, 130, 246, 0.2)',
                     borderColor: 'rgba(59, 130, 246, 0.8)',
@@ -101,7 +100,7 @@ const ResultsVisualization = ({ scores }: ResultsVisualizationProps) => {
                         Innovation Assessment Results
                     </h2>
                     <p className="text-gray-600">
-                        Your organization's innovation capability analysis
+                        Your organization&apos;s innovation capability analysis
                     </p>
                 </div>
 

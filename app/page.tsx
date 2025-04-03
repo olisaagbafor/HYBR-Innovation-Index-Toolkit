@@ -25,7 +25,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-xl text-gray-600 mt-4 relative z-10">
-            Assess and enhance your organization's innovation capabilities through our comprehensive evaluation tool.
+            Assess and enhance your organization&apos;s innovation capabilities through our comprehensive evaluation tool.
           </p>
         </header>
 
