@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Innovation Index Toolkit
 
-## Getting Started
+A web-based assessment tool that helps organizations evaluate and visualize their innovation capabilities through an interactive questionnaire and detailed analytics.
 
-First, run the development server:
+## 🌟 Features
+
+- **Interactive Assessment Form**: Eight carefully crafted questions covering key innovation dimensions
+- **Real-time Scoring**: Instant calculation of innovation scores as users complete the assessment
+- **Visual Analytics**: Dynamic radar chart visualization of results across different innovation dimensions
+- **Detailed Insights**: Automated analysis of strengths and areas for improvement
+- **Responsive Design**: Seamless experience across desktop and mobile devices
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18.0 or later
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone [git@github.com:olisaagbafor/HYBR-Innovation-Index-Toolkit.git](git@github.com:olisaagbafor/HYBR-Innovation-Index-Toolkit.git)
+cd innovation-index-toolkit
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Technical Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Frontend Stack
 
-## Learn More
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Charts**: Chart.js
+- **Form Management**: React Hook Form
 
-To learn more about Next.js, take a look at the following resources:
+### Key Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **InnovationForm (`app/components/InnovationForm.tsx`)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Handles user input collection
+   - Implements form validation
+   - Manages assessment progress
+   - Provides real-time feedback
 
-## Deploy on Vercel
+2. **ResultsVisualization (`app/components/ResultsVisualization.tsx`)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - Generates radar chart visualization
+   - Calculates overall scores
+   - Provides detailed insights
+   - Displays strengths and improvement areas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Main Page (`app/page.tsx`)**
+   - Manages application state
+   - Handles component transitions
+   - Provides overall layout structure
+
+### Scoring System
+
+The assessment uses a 5-point Likert scale:
+
+1. Very Poorly/Not Likely
+2. Poorly
+3. Adequately
+4. Well
+5. Excellently Well/Always
+
+Overall scoring categories:
+
+- 4.5 - 5.0: Excellence
+- 3.5 - 4.4: Strong
+- 2.5 - 3.4: Moderate
+- 1.0 - 2.4: Needs Improvement
+
+## 📦 Deployment
+
+### Deploying to Vercel
+
+1. Create a Vercel account at [vercel.com](https://vercel.com)
+2. Install Vercel CLI:
+
+```bash
+npm install -g vercel
+```
+
+3. Deploy the application:
+
+```bash
+vercel
+```
+
+### Alternative Deployment Options
+
+The application can also be deployed to other platforms that support Next.js:
+
+- AWS Amplify
+- Netlify
+- Digital Ocean App Platform
+
+## 🛠️ Development
+
+### Code Structure
+
+```
+innovation-index-toolkit/
+├── app/
+│   ├── components/
+│   │   ├── InnovationForm.tsx
+│   │   └── ResultsVisualization.tsx
+│   ├── page.tsx
+│   └── layout.tsx
+├── public/
+└── package.json
+```
+
+### Adding New Questions
+
+To add new questions, modify the `questions` array in `InnovationForm.tsx`:
+
+```typescript
+const questions = [
+  {
+    id: "uniqueId",
+    text: "Question text",
+    description: "Detailed description",
+  },
+  // ...
+];
+```
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request

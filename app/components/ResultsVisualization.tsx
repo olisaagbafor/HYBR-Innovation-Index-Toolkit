@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import { questions } from './InnovationForm';
 
 interface ResultsVisualizationProps {
     scores: {
@@ -10,7 +11,10 @@ interface ResultsVisualizationProps {
 const ResultsVisualization = ({ scores }: ResultsVisualizationProps) => {
     const chartRef = useRef<HTMLCanvasElement>(null);
     const chartInstance = useRef<Chart | null>(null);
-    const averageScore = (Object.values(scores).reduce((a, b) => a + b, 0) / Object.values(scores).length);
+
+    // Calculate average score properly by ensuring numbers are used
+    const averageScore = Object.values(scores).reduce((sum, score) =>
+        sum + Number(score), 0) / Object.values(scores).length;
 
     const getScoreCategory = (score: number) => {
         if (score >= 4.5) return { text: 'Excellence', color: 'text-green-600' };
@@ -29,25 +33,16 @@ const ResultsVisualization = ({ scores }: ResultsVisualizationProps) => {
         const ctx = chartRef.current.getContext('2d');
         if (!ctx) return;
 
-        const labels = [
-            'Problem Solving',
-            'Creativity',
-            'Resources',
-            'Collaboration',
-            'Implementation',
-            'Learning',
-            'Customer Focus',
-            'Adaptability'
-        ];
-
-        const data = labels.map(label =>
-            scores[label.toLowerCase().replace(/\s+/g, '')] || 0
+        // Use questions array to generate labels and data
+        const data = questions.map(question =>
+            Number(scores[question.id]) || 0
         );
 
         chartInstance.current = new Chart(ctx, {
             type: 'radar',
             data: {
-                labels,
+                // Use the label property for visualization
+                labels: questions.map(q => q.label),
                 datasets: [{
                     label: 'Innovation Score',
                     data,
@@ -135,20 +130,22 @@ const ResultsVisualization = ({ scores }: ResultsVisualizationProps) => {
                             Key Insights
                         </h3>
                         <ul className="space-y-2">
-                            {Object.entries(scores)
-                                .sort(([, a], [, b]) => b - a)
+                            {questions
+                                .map(q => ({ id: q.id, label: q.label, score: Number(scores[q.id]) || 0 }))
+                                .sort((a, b) => b.score - a.score)
                                 .slice(0, 2)
-                                .map(([key, score]) => (
-                                    <li key={key} className="text-green-600">
-                                        ✓ Strong {key.replace(/([A-Z])/g, ' $1').toLowerCase()} ({score}/5)
+                                .map(({ id, label, score }) => (
+                                    <li key={id} className="text-green-600">
+                                        ✓ Strong {label} ({score}/5)
                                     </li>
                                 ))}
-                            {Object.entries(scores)
-                                .sort(([, a], [, b]) => a - b)
+                            {questions
+                                .map(q => ({ id: q.id, label: q.label, score: Number(scores[q.id]) || 0 }))
+                                .sort((a, b) => a.score - b.score)
                                 .slice(0, 1)
-                                .map(([key, score]) => (
-                                    <li key={key} className="text-red-600">
-                                        ⚠ Improve {key.replace(/([A-Z])/g, ' $1').toLowerCase()} ({score}/5)
+                                .map(({ id, label, score }) => (
+                                    <li key={id} className="text-red-600">
+                                        ⚠ Improve {label} ({score}/5)
                                     </li>
                                 ))}
                         </ul>
